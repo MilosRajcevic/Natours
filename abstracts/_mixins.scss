@@ -1,0 +1,58 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin center-horizontal-vertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin center-horizontal-vertical-reset {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(0, 0);
+}
+// MEDIA QUERY MANAGER
+/*
+0-600px:        Phone
+600-900px:      Tablet
+900-1200px:     Landscpe Tablet
+1200*-1800 is where normal styles apply
+1800px + : Big desktop
+
+ORDER: Base + typography > general layout + grid > page layout > componets
+
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
